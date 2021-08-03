@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { theme } from '../styles/theme';
 
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -16,11 +17,13 @@ const queryClient = new QueryClient()
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <SidebarDrawerProvider>
-        <ChakraProvider theme={theme}>
+      <ChakraProvider theme={theme}>
+        <SidebarDrawerProvider>
           <Component {...pageProps} />
-        </ChakraProvider>
-      </SidebarDrawerProvider>
+        </SidebarDrawerProvider>
+      </ChakraProvider>
+
+      <ReactQueryDevtools />
     </QueryClientProvider>
   )
 }
